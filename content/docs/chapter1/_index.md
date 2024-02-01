@@ -7,50 +7,29 @@ icon: book
 icon_pack: fas
 
 # Page metadata.
-title: Chapter 1
+title: Data Manipulation 
 date: '2018-09-09T00:00:00Z'
 type: book # Do not modify.
 ---
 
-## Flexibility
+## Data Manipulation with **dplyr**
 
-Document everything!
+The dplyr package in R is a powerful tool for data manipulation that provides a consistent set of verbs to help simplify complex data manipulation tasks. In this example, we use the mtcars dataset, which is readily available in R, to demonstrate filtering, selecting specific columns, grouping, and summarizing data.
 
-This feature can be used for publishing content such as:
+```R
+# Load the dplyr package for data manipulation
+library(dplyr)
 
-- **Online courses**
-- **Project or software documentation**
-- **Tutorials**
-- **Notes**
-
-The `courses` folder may be renamed. For example, we can rename it to `docs` for software/project documentation or `tutorials` for creating an online course.
-
-## Delete courses
-
-**To remove these pages, delete the `courses` folder and see below to delete the associated menu link.**
-
-## Update site menu
-
-After renaming or deleting the `courses` folder, you may wish to update any `[[main]]` menu links to it by editing your menu configuration at `config/_default/menus.toml`.
-
-For example, if you delete this folder, you can remove the following from your menu configuration:
-
-```toml
-[[main]]
-  name = "Courses"
-  url = "courses/"
-  weight = 50
+# Data manipulation using the mtcars dataset
+mtcars %>%
+  filter(mpg > 20) %>%  # Filter rows where miles per gallon (mpg) is greater than 20
+  select(mpg, cyl, wt) %>%  # Select columns: mpg, number of cylinders (cyl), and weight (wt)
+  group_by(cyl) %>%  # Group data by the number of cylinders
+  summarise(
+    avg_mpg = mean(mpg),  # Calculate average mpg for each group of cylinders
+    avg_wt = mean(wt)  # Calculate average weight for each group of cylinders
+  )
+# This code filters cars with more than 20 mpg, selects relevant columns, groups by cylinder count,
+# and then calculates the average mpg and weight for each group.
 ```
 
-Or, if you are creating a software documentation site, you can rename the `courses` folder to `docs` and update the associated _Courses_ menu configuration to:
-
-```toml
-[[main]]
-  name = "Docs"
-  url = "docs/"
-  weight = 50
-```
-
-## Update the docs menu
-
-If you use the _docs_ layout, note that the name of the menu in the front matter should be in the form `[menu.X]` where `X` is the folder name. Hence, if you rename the `courses/example/` folder, you should also rename the menu definitions in the front matter of files within `courses/example/` from `[menu.example]` to `[menu.<NewFolderName>]`.
