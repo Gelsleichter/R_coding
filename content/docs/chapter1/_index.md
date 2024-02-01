@@ -1,6 +1,6 @@
 ---
 # Title, summary, and page position.
-linktitle: Chapter 1
+linktitle: Data Manipulation
 summary: Learn a bit of data management with dplyr R package.
 weight: 1
 icon: book
