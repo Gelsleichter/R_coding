@@ -1,54 +1,33 @@
 ---
 # Title, summary, and page position.
-linktitle: Chapter 2
-summary: Learn how to use Academic's docs layout for publishing online courses, software documentation, and tutorials.
+linktitle: Data Visualization
+summary: Learn a bit of data visualization with dplyr R package.
 weight: 1
-icon: book-reader
+icon: book
 icon_pack: fas
 
 # Page metadata.
-title: Chapter 2
+title: Data Visualization 
 date: '2018-09-09T00:00:00Z'
 type: book # Do not modify.
 ---
 
-## Flexibility
+## Data Visualization with **ggplot2**
 
-This feature can be used for publishing content such as:
+The ggplot2 package is a versatile tool for creating complex and aesthetically pleasing visualizations. Here, we create a scatter plot to examine the relationship between car weight (wt) and miles per gallon (mpg), using the number of gears (gear) to color-code the points, which adds additional layer of information to the plot.
 
-- **Online courses**
-- **Project or software documentation**
-- **Tutorials**
-- **Notes**
+```R
+# Load the ggplot2 package for advanced data visualization
+library(ggplot2)
 
-The `courses` folder may be renamed. For example, we can rename it to `docs` for software/project documentation or `tutorials` for creating an online course.
+# Create a scatter plot with ggplot2
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(gear))) +  # Define aesthetics: map wt to x, mpg to y, and gear to color
+  geom_point() +  # Add points to represent each car
+  theme_minimal() +  # Use a minimalistic theme for a clean look
+  labs(title = "MPG vs. Car Weight, Colored by Number of Gears",  # Add a plot title
+       x = "Car Weight (1000 lbs)",  # Label the x-axis
+       y = "Miles per Gallon",  # Label the y-axis
+       color = "Number of Gears")  # Add a legend title for gear colors
+# This visualization helps in understanding how both weight and the number of gears relate to a car's fuel efficiency.
 
-## Delete courses
-
-**To remove these pages, delete the `courses` folder and see below to delete the associated menu link.**
-
-## Update site menu
-
-After renaming or deleting the `courses` folder, you may wish to update any `[[main]]` menu links to it by editing your menu configuration at `config/_default/menus.toml`.
-
-For example, if you delete this folder, you can remove the following from your menu configuration:
-
-```toml
-[[main]]
-  name = "Courses"
-  url = "courses/"
-  weight = 50
 ```
-
-Or, if you are creating a software documentation site, you can rename the `courses` folder to `docs` and update the associated _Courses_ menu configuration to:
-
-```toml
-[[main]]
-  name = "Docs"
-  url = "docs/"
-  weight = 50
-```
-
-## Update the docs menu
-
-If you use the _docs_ layout, note that the name of the menu in the front matter should be in the form `[menu.X]` where `X` is the folder name. Hence, if you rename the `courses/example/` folder, you should also rename the menu definitions in the front matter of files within `courses/example/` from `[menu.example]` to `[menu.<NewFolderName>]`.
